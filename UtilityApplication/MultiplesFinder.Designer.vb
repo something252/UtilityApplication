@@ -88,7 +88,6 @@ Partial Class MultiplesFinder
         Me.InputTextBox.Name = "InputTextBox"
         Me.InputTextBox.Size = New System.Drawing.Size(126, 20)
         Me.InputTextBox.TabIndex = 0
-        Me.InputTextBox.Text = "2147483648"
         Me.InputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label1
@@ -151,8 +150,6 @@ Partial Class MultiplesFinder
         'AutoSelectCheckBox
         '
         Me.AutoSelectCheckBox.AutoSize = True
-        Me.AutoSelectCheckBox.Checked = True
-        Me.AutoSelectCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AutoSelectCheckBox.Location = New System.Drawing.Point(12, 603)
         Me.AutoSelectCheckBox.Name = "AutoSelectCheckBox"
         Me.AutoSelectCheckBox.Size = New System.Drawing.Size(81, 17)

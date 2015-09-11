@@ -182,16 +182,18 @@ Partial Class TimeCalculator
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.AddDays)
-        Me.GroupBox1.Controls.Add(Me.Label22)
         Me.GroupBox1.Controls.Add(Me.AddMinutes)
         Me.GroupBox1.Controls.Add(Me.AddHours)
         Me.GroupBox1.Controls.Add(Me.CurrentMinutes)
         Me.GroupBox1.Controls.Add(Me.CurrentHours)
+        Me.GroupBox1.Controls.Add(Me.ResultText3)
+        Me.GroupBox1.Controls.Add(Me.ResultText4)
+        Me.GroupBox1.Controls.Add(Me.ResultText1)
+        Me.GroupBox1.Controls.Add(Me.ResultText2)
+        Me.GroupBox1.Controls.Add(Me.Label22)
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.ResultText3)
         Me.GroupBox1.Controls.Add(Me.AMRadioButton)
-        Me.GroupBox1.Controls.Add(Me.ResultText4)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label8)
@@ -199,8 +201,6 @@ Partial Class TimeCalculator
         Me.GroupBox1.Controls.Add(Me.Label9)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.ResultText1)
-        Me.GroupBox1.Controls.Add(Me.ResultText2)
         Me.GroupBox1.Controls.Add(Me.PMRadioButton)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.CalculateButton1)
@@ -319,7 +319,7 @@ Partial Class TimeCalculator
         '
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Location = New System.Drawing.Point(130, 151)
+        Me.Label2.Location = New System.Drawing.Point(131, 151)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(11, 16)
         Me.Label2.TabIndex = 18

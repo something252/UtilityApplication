@@ -46,17 +46,24 @@
 
     Private Sub RadioButton1_MouseClick(sender As Object, e As MouseEventArgs) Handles RadioButton1.MouseClick
         With Discounter
+            For Each myForm As Form In My.Application.OpenForms
+                If myForm.Name = Discounter.Name Then
+                    .Location = Me.Location
+                End If
+            Next
             .Show()
             .Location = Me.Location
             .AutoCalculateCheckBox.Checked = Me.AutoCalculateCheckBox.Checked
             .AutoSelectCheckBox.Checked = Me.AutoSelectCheckBox.Checked
             .SuppressErrorsCheckBox.Checked = Me.SuppressErrorsCheckBox.Checked
         End With
-        MainForm.discounterHistory = 0 ' discounter is now active (0 = discounter form)
+        My.Settings.DiscounterVersion = 1 ' discounter is now active (1 = discounter form)
         Me.Hide()
     End Sub
 
     Private Sub BackButton_Click(sender As Object, e As EventArgs) Handles BackButton.Click
+        SaveSettings()
+
         MainForm.Show()
         MainForm.WindowState = FormWindowState.Normal ' Unminimize Window
         Me.Hide()
@@ -205,7 +212,7 @@
         If e.KeyCode = Keys.Enter Then : e.SuppressKeyPress = True : ComparePricesButton.PerformClick() : End If
     End Sub
 
-    Private Sub RedButton1_Click(sender As Object, e As EventArgs) Handles RedButton1.Click
+    Private Sub RedButton1_Click(sender As Object, e As EventArgs) Handles RedButton1.Click, RedButton1.DoubleClick
         If RedButton1_Clicked = False Then
             Discount1TextBox3.MaxLength = standardMaxLength ' editable now, so set textbox to desired max length
             RedButton1_Clicked = True ' User gives discount and discounted price... Solve for Original Price.
@@ -243,7 +250,7 @@
 
     End Sub
 
-    Private Sub RedButton2_Click(sender As Object, e As EventArgs) Handles RedButton2.Click
+    Private Sub RedButton2_Click(sender As Object, e As EventArgs) Handles RedButton2.Click, RedButton2.DoubleClick
         If RedButton2_Clicked = False Then
             Discount1TextBox3.MaxLength = standardMaxLength ' editable now, so set textbox to desired max length
             RedButton1_Clicked = False
@@ -280,7 +287,7 @@
         End If
     End Sub
 
-    Private Sub RedButton3_Click(sender As Object, e As EventArgs) Handles RedButton3.Click
+    Private Sub RedButton3_Click(sender As Object, e As EventArgs) Handles RedButton3.Click, RedButton3.DoubleClick
         If RedButton3_Clicked = False Then
             Discount1TextBox3.MaxLength = 32767 ' no longer editable, so increase maxlength
             RedButton1_Clicked = False
@@ -318,6 +325,22 @@
         Me.Icon = My.Resources.ProgramIcon_32x32
 
         Discount1TextBox3_lastGoodInput = Discount1TextBox3.Text ' set to default text
+
+        For Each myForm As Form In My.Application.OpenForms
+            If myForm.Name = Discounter.Name Then
+                Me.Location = Discounter.Location
+            End If
+        Next
+
+        If Not IsNothing(My.Settings.DiscounterAutoCalculate) Then
+            AutoCalculateCheckBox.Checked = My.Settings.DiscounterAutoCalculate
+        End If
+        If Not IsNothing(My.Settings.DiscounterAutoSelect) Then
+            AutoSelectCheckBox.Checked = My.Settings.DiscounterAutoSelect
+        End If
+        If Not IsNothing(My.Settings.DiscounterSuppressErrors) Then
+            SuppressErrorsCheckBox.Checked = My.Settings.DiscounterSuppressErrors
+        End If
     End Sub
 
     Private Sub Discount1TextBox1_TextChanged(sender As Object, e As EventArgs) Handles Discount1TextBox1.TextChanged
@@ -390,4 +413,15 @@
         MainForm.WindowState = FormWindowState.Normal ' Unminimize Window
     End Sub
 
+    Private Sub Discounter2_FormClosing() Handles MyBase.FormClosing
+        Me.SaveSettings()
+    End Sub
+
+    Private Sub SaveSettings()
+        My.Settings.DiscounterVersion = 2
+
+        My.Settings.DiscounterAutoCalculate = Me.AutoCalculateCheckBox.Checked
+        My.Settings.DiscounterAutoSelect = Me.AutoSelectCheckBox.Checked
+        My.Settings.DiscounterSuppressErrors = Me.SuppressErrorsCheckBox.Checked
+    End Sub
 End Class

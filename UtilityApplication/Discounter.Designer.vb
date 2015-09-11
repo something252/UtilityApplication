@@ -30,37 +30,37 @@ Partial Class Discounter
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Discount1Result = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Discount2Result = New System.Windows.Forms.TextBox()
+        Me.Discount2TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Discount2TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Discount2Button1 = New System.Windows.Forms.Button()
         Me.Label88 = New System.Windows.Forms.Label()
-        Me.Discount2TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Discount2TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label99 = New System.Windows.Forms.Label()
         Me.BackButton = New System.Windows.Forms.Button()
         Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.PercentageResultTextBox4 = New System.Windows.Forms.TextBox()
         Me.PercentageResultTextBox2 = New System.Windows.Forms.TextBox()
+        Me.PercentageResultTextBox1 = New System.Windows.Forms.TextBox()
+        Me.PercentageResultTextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.PercentLabel2 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.PercentageResultTextBox1 = New System.Windows.Forms.TextBox()
         Me.PercentLabel1 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.PercentageResultTextBox3 = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.ComparePricesButton = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.AutoCalculateCheckBox = New System.Windows.Forms.CheckBox()
         Me.AutoSelectCheckBox = New System.Windows.Forms.CheckBox()
@@ -145,15 +145,15 @@ Partial Class Discounter
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.Discount1Result)
+        Me.GroupBox1.Controls.Add(Me.Discount1TextBox1)
+        Me.GroupBox1.Controls.Add(Me.Discount1TextBox2)
+        Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.Discount1Button1)
         Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Discount1TextBox1)
-        Me.GroupBox1.Controls.Add(Me.Discount1TextBox2)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
@@ -162,17 +162,6 @@ Partial Class Discounter
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "     Price amount BEFORE applied discount (find original price)"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Location = New System.Drawing.Point(210, 182)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(15, 16)
-        Me.Label1.TabIndex = 12
-        Me.Label1.Text = "$"
         '
         'Discount1Result
         '
@@ -184,6 +173,17 @@ Partial Class Discounter
         Me.Discount1Result.Size = New System.Drawing.Size(119, 22)
         Me.Discount1Result.TabIndex = 3
         Me.Discount1Result.Text = "0"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Location = New System.Drawing.Point(210, 182)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(15, 16)
+        Me.Label1.TabIndex = 12
+        Me.Label1.Text = "$"
         '
         'Label8
         '
@@ -197,15 +197,15 @@ Partial Class Discounter
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Controls.Add(Me.Discount2Result)
+        Me.GroupBox2.Controls.Add(Me.Discount2TextBox1)
+        Me.GroupBox2.Controls.Add(Me.Discount2TextBox2)
+        Me.GroupBox2.Controls.Add(Me.Label9)
         Me.GroupBox2.Controls.Add(Me.Label11)
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Controls.Add(Me.Discount2Button1)
         Me.GroupBox2.Controls.Add(Me.Label88)
-        Me.GroupBox2.Controls.Add(Me.Discount2TextBox1)
-        Me.GroupBox2.Controls.Add(Me.Discount2TextBox2)
         Me.GroupBox2.Controls.Add(Me.Label99)
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(418, 12)
@@ -214,17 +214,6 @@ Partial Class Discounter
         Me.GroupBox2.TabIndex = 13
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "   Price amount AFTER discount is applied (find discount price)"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.BackColor = System.Drawing.Color.Transparent
-        Me.Label9.Location = New System.Drawing.Point(210, 179)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(15, 16)
-        Me.Label9.TabIndex = 12
-        Me.Label9.Text = "$"
         '
         'Discount2Result
         '
@@ -236,6 +225,39 @@ Partial Class Discounter
         Me.Discount2Result.Size = New System.Drawing.Size(119, 22)
         Me.Discount2Result.TabIndex = 7
         Me.Discount2Result.Text = "0"
+        '
+        'Discount2TextBox1
+        '
+        Me.Discount2TextBox1.Location = New System.Drawing.Point(223, 55)
+        Me.Discount2TextBox1.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.Discount2TextBox1.MaxLength = 15
+        Me.Discount2TextBox1.Name = "Discount2TextBox1"
+        Me.Discount2TextBox1.Size = New System.Drawing.Size(119, 22)
+        Me.Discount2TextBox1.TabIndex = 4
+        Me.Discount2TextBox1.Text = "0"
+        Me.Discount2TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Discount2TextBox2
+        '
+        Me.Discount2TextBox2.Location = New System.Drawing.Point(223, 83)
+        Me.Discount2TextBox2.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.Discount2TextBox2.MaxLength = 15
+        Me.Discount2TextBox2.Name = "Discount2TextBox2"
+        Me.Discount2TextBox2.Size = New System.Drawing.Size(119, 22)
+        Me.Discount2TextBox2.TabIndex = 5
+        Me.Discount2TextBox2.Text = "0"
+        Me.Discount2TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.BackColor = System.Drawing.Color.Transparent
+        Me.Label9.Location = New System.Drawing.Point(210, 179)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(15, 16)
+        Me.Label9.TabIndex = 12
+        Me.Label9.Text = "$"
         '
         'Label11
         '
@@ -287,28 +309,6 @@ Partial Class Discounter
         Me.Label88.TabIndex = 7
         Me.Label88.Text = "Discount:"
         '
-        'Discount2TextBox1
-        '
-        Me.Discount2TextBox1.Location = New System.Drawing.Point(223, 55)
-        Me.Discount2TextBox1.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.Discount2TextBox1.MaxLength = 15
-        Me.Discount2TextBox1.Name = "Discount2TextBox1"
-        Me.Discount2TextBox1.Size = New System.Drawing.Size(119, 22)
-        Me.Discount2TextBox1.TabIndex = 4
-        Me.Discount2TextBox1.Text = "0"
-        Me.Discount2TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Discount2TextBox2
-        '
-        Me.Discount2TextBox2.Location = New System.Drawing.Point(223, 83)
-        Me.Discount2TextBox2.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.Discount2TextBox2.MaxLength = 15
-        Me.Discount2TextBox2.Name = "Discount2TextBox2"
-        Me.Discount2TextBox2.Size = New System.Drawing.Size(119, 22)
-        Me.Discount2TextBox2.TabIndex = 5
-        Me.Discount2TextBox2.Text = "0"
-        Me.Discount2TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'Label99
         '
         Me.Label99.AutoSize = True
@@ -349,18 +349,18 @@ Partial Class Discounter
         '
         Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox4)
         Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox2)
+        Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox1)
+        Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox3)
+        Me.GroupBox3.Controls.Add(Me.TextBox5)
+        Me.GroupBox3.Controls.Add(Me.TextBox6)
         Me.GroupBox3.Controls.Add(Me.PercentLabel2)
         Me.GroupBox3.Controls.Add(Me.Label17)
-        Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox1)
         Me.GroupBox3.Controls.Add(Me.PercentLabel1)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox3)
         Me.GroupBox3.Controls.Add(Me.Label20)
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.ComparePricesButton)
         Me.GroupBox3.Controls.Add(Me.Label18)
-        Me.GroupBox3.Controls.Add(Me.TextBox5)
-        Me.GroupBox3.Controls.Add(Me.TextBox6)
         Me.GroupBox3.Controls.Add(Me.Label19)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.Location = New System.Drawing.Point(824, 12)
@@ -373,7 +373,7 @@ Partial Class Discounter
         'PercentageResultTextBox4
         '
         Me.PercentageResultTextBox4.BackColor = System.Drawing.SystemColors.Control
-        Me.PercentageResultTextBox4.Location = New System.Drawing.Point(261, 176)
+        Me.PercentageResultTextBox4.Location = New System.Drawing.Point(261, 179)
         Me.PercentageResultTextBox4.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
         Me.PercentageResultTextBox4.Name = "PercentageResultTextBox4"
         Me.PercentageResultTextBox4.ReadOnly = True
@@ -384,7 +384,7 @@ Partial Class Discounter
         'PercentageResultTextBox2
         '
         Me.PercentageResultTextBox2.BackColor = System.Drawing.SystemColors.Control
-        Me.PercentageResultTextBox2.Location = New System.Drawing.Point(261, 148)
+        Me.PercentageResultTextBox2.Location = New System.Drawing.Point(261, 151)
         Me.PercentageResultTextBox2.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
         Me.PercentageResultTextBox2.Name = "PercentageResultTextBox2"
         Me.PercentageResultTextBox2.ReadOnly = True
@@ -392,11 +392,53 @@ Partial Class Discounter
         Me.PercentageResultTextBox2.TabIndex = 12
         Me.PercentageResultTextBox2.Text = "0"
         '
+        'PercentageResultTextBox1
+        '
+        Me.PercentageResultTextBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.PercentageResultTextBox1.Location = New System.Drawing.Point(78, 151)
+        Me.PercentageResultTextBox1.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.PercentageResultTextBox1.Name = "PercentageResultTextBox1"
+        Me.PercentageResultTextBox1.ReadOnly = True
+        Me.PercentageResultTextBox1.Size = New System.Drawing.Size(81, 22)
+        Me.PercentageResultTextBox1.TabIndex = 11
+        Me.PercentageResultTextBox1.Text = "0"
+        '
+        'PercentageResultTextBox3
+        '
+        Me.PercentageResultTextBox3.BackColor = System.Drawing.SystemColors.Control
+        Me.PercentageResultTextBox3.Location = New System.Drawing.Point(78, 179)
+        Me.PercentageResultTextBox3.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.PercentageResultTextBox3.Name = "PercentageResultTextBox3"
+        Me.PercentageResultTextBox3.ReadOnly = True
+        Me.PercentageResultTextBox3.Size = New System.Drawing.Size(81, 22)
+        Me.PercentageResultTextBox3.TabIndex = 13
+        Me.PercentageResultTextBox3.Text = "0"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(223, 55)
+        Me.TextBox5.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.TextBox5.MaxLength = 15
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(119, 22)
+        Me.TextBox5.TabIndex = 8
+        Me.TextBox5.Text = "0"
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Location = New System.Drawing.Point(223, 83)
+        Me.TextBox6.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.TextBox6.MaxLength = 15
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(119, 22)
+        Me.TextBox6.TabIndex = 9
+        Me.TextBox6.Text = "0"
+        '
         'PercentLabel2
         '
         Me.PercentLabel2.AutoSize = True
         Me.PercentLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.PercentLabel2.Location = New System.Drawing.Point(163, 182)
+        Me.PercentLabel2.Location = New System.Drawing.Point(159, 182)
         Me.PercentLabel2.Margin = New System.Windows.Forms.Padding(0)
         Me.PercentLabel2.Name = "PercentLabel2"
         Me.PercentLabel2.Size = New System.Drawing.Size(102, 16)
@@ -407,23 +449,12 @@ Partial Class Discounter
         '
         Me.Label17.AutoSize = True
         Me.Label17.BackColor = System.Drawing.Color.Transparent
-        Me.Label17.Location = New System.Drawing.Point(64, 154)
+        Me.Label17.Location = New System.Drawing.Point(60, 154)
         Me.Label17.Margin = New System.Windows.Forms.Padding(0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(20, 16)
         Me.Label17.TabIndex = 18
         Me.Label17.Text = "%"
-        '
-        'PercentageResultTextBox1
-        '
-        Me.PercentageResultTextBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PercentageResultTextBox1.Location = New System.Drawing.Point(82, 151)
-        Me.PercentageResultTextBox1.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.PercentageResultTextBox1.Name = "PercentageResultTextBox1"
-        Me.PercentageResultTextBox1.ReadOnly = True
-        Me.PercentageResultTextBox1.Size = New System.Drawing.Size(81, 22)
-        Me.PercentageResultTextBox1.TabIndex = 11
-        Me.PercentageResultTextBox1.Text = "0"
         '
         'PercentLabel1
         '
@@ -440,23 +471,12 @@ Partial Class Discounter
         '
         Me.Label15.AutoSize = True
         Me.Label15.BackColor = System.Drawing.Color.Transparent
-        Me.Label15.Location = New System.Drawing.Point(64, 182)
+        Me.Label15.Location = New System.Drawing.Point(60, 182)
         Me.Label15.Margin = New System.Windows.Forms.Padding(0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(20, 16)
         Me.Label15.TabIndex = 15
         Me.Label15.Text = "%"
-        '
-        'PercentageResultTextBox3
-        '
-        Me.PercentageResultTextBox3.BackColor = System.Drawing.SystemColors.Control
-        Me.PercentageResultTextBox3.Location = New System.Drawing.Point(82, 179)
-        Me.PercentageResultTextBox3.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.PercentageResultTextBox3.Name = "PercentageResultTextBox3"
-        Me.PercentageResultTextBox3.ReadOnly = True
-        Me.PercentageResultTextBox3.Size = New System.Drawing.Size(81, 22)
-        Me.PercentageResultTextBox3.TabIndex = 13
-        Me.PercentageResultTextBox3.Text = "0"
         '
         'Label20
         '
@@ -498,26 +518,6 @@ Partial Class Discounter
         Me.Label18.TabIndex = 7
         Me.Label18.Text = "Second Number:"
         '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(223, 55)
-        Me.TextBox5.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.TextBox5.MaxLength = 15
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(119, 22)
-        Me.TextBox5.TabIndex = 8
-        Me.TextBox5.Text = "0"
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Location = New System.Drawing.Point(223, 83)
-        Me.TextBox6.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.TextBox6.MaxLength = 15
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(119, 22)
-        Me.TextBox6.TabIndex = 9
-        Me.TextBox6.Text = "0"
-        '
         'Label19
         '
         Me.Label19.AutoSize = True
@@ -544,8 +544,6 @@ Partial Class Discounter
         'AutoSelectCheckBox
         '
         Me.AutoSelectCheckBox.AutoSize = True
-        Me.AutoSelectCheckBox.Checked = True
-        Me.AutoSelectCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AutoSelectCheckBox.Location = New System.Drawing.Point(25, 274)
         Me.AutoSelectCheckBox.Name = "AutoSelectCheckBox"
         Me.AutoSelectCheckBox.Size = New System.Drawing.Size(81, 17)

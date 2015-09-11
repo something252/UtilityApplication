@@ -128,6 +128,16 @@
 
     Private Sub TimeCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.ProgramIcon_32x32
+
+        If Not IsNothing(My.Settings.TimeCalcAutoCalculate) Then
+            AutoCalculateCheckBox.Checked = My.Settings.TimeCalcAutoCalculate
+        End If
+        If Not IsNothing(My.Settings.TimeCalcAutoSelect) Then
+            AutoSelectCheckBox.Checked = My.Settings.TimeCalcAutoSelect
+        End If
+        If Not IsNothing(My.Settings.TimeCalcSuppressErrors) Then
+            SuppressErrorsCheckBox.Checked = My.Settings.TimeCalcSuppressErrors
+        End If
     End Sub
 
     Private Sub CurrentHours_KeyDown(sender As Object, e As KeyEventArgs) Handles CurrentHours.KeyDown
@@ -168,6 +178,10 @@
     Private Sub TimeCalculator_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         MainForm.Show()
         MainForm.WindowState = FormWindowState.Normal ' Unminimize Window
+
+        My.Settings.TimeCalcAutoCalculate = AutoCalculateCheckBox.Checked
+        My.Settings.TimeCalcAutoSelect = AutoSelectCheckBox.Checked
+        My.Settings.TimeCalcSuppressErrors = SuppressErrorsCheckBox.Checked
     End Sub
 
     Private Sub CurrentHours_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles CurrentHours.Validating

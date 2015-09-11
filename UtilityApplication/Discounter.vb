@@ -37,17 +37,24 @@
 
     Private Sub RadioButton1_MouseClick(sender As Object, e As MouseEventArgs) Handles RadioButton1.MouseClick
         With Discounter2
+            For Each myForm As Form In My.Application.OpenForms
+                If myForm.Name = Discounter2.Name Then
+                    .Location = Me.Location
+                End If
+            Next
             .Show()
             .Location = Me.Location
             .AutoCalculateCheckBox.Checked = Me.AutoCalculateCheckBox.Checked
             .AutoSelectCheckBox.Checked = Me.AutoSelectCheckBox.Checked
             .SuppressErrorsCheckBox.Checked = Me.SuppressErrorsCheckBox.Checked
         End With
-        MainForm.discounterHistory = 1 ' discounter2 is now active (1 = discounter2 form)
+        My.Settings.DiscounterVersion = 2 ' discounter2 is now active (2 = discounter2 form)
         Me.Hide()
     End Sub
 
     Private Sub BackButton_Click(sender As Object, e As EventArgs) Handles BackButton.Click
+        SaveSettings()
+
         MainForm.Show()
         MainForm.WindowState = FormWindowState.Normal ' Unminimize Window
         Me.Hide()
@@ -198,6 +205,22 @@
 
     Private Sub Discounter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.ProgramIcon_32x32
+
+        For Each myForm As Form In My.Application.OpenForms
+            If myForm.Name = Discounter2.Name Then
+                Me.Location = Discounter2.Location
+            End If
+        Next
+
+        If Not IsNothing(My.Settings.DiscounterAutoCalculate) Then
+            AutoCalculateCheckBox.Checked = My.Settings.DiscounterAutoCalculate
+        End If
+        If Not IsNothing(My.Settings.DiscounterAutoSelect) Then
+            AutoSelectCheckBox.Checked = My.Settings.DiscounterAutoSelect
+        End If
+        If Not IsNothing(My.Settings.DiscounterSuppressErrors) Then
+            SuppressErrorsCheckBox.Checked = My.Settings.DiscounterSuppressErrors
+        End If
     End Sub
 
     Private Sub Discount1TextBox1_TextChanged(sender As Object, e As EventArgs) Handles Discount1TextBox1.TextChanged
@@ -277,5 +300,17 @@
     Private Sub Discounter_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         MainForm.Show()
         MainForm.WindowState = FormWindowState.Normal ' Unminimize Window
+    End Sub
+
+    Private Sub Discounter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Me.SaveSettings()
+    End Sub
+
+    Private Sub SaveSettings()
+        My.Settings.DiscounterVersion = 1
+
+        My.Settings.DiscounterAutoCalculate = Me.AutoCalculateCheckBox.Checked
+        My.Settings.DiscounterAutoSelect = Me.AutoSelectCheckBox.Checked
+        My.Settings.DiscounterSuppressErrors = Me.SuppressErrorsCheckBox.Checked
     End Sub
 End Class

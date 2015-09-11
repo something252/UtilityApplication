@@ -590,6 +590,10 @@
     Private Sub MultiplesFinder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.ProgramIcon_32x32
         ProgressGroupBox.Location = New Point(ProgressGroupBox.Location.X, ProgressGroupBox.Location.Y - 78) ' change location
+
+        If Not IsNothing(My.Settings.MultiplesFinderAutoSelect) Then
+            AutoSelectCheckBox.Checked = My.Settings.MultiplesFinderAutoSelect
+        End If
     End Sub
 
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
@@ -633,6 +637,8 @@
 
         MainForm.Show()
         MainForm.WindowState = FormWindowState.Normal ' Unminimize Window
+
+        My.Settings.MultiplesFinderAutoSelect = AutoSelectCheckBox.Checked
     End Sub
 
     Private Sub InputTextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles InputTextBox.Validating

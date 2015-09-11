@@ -1,5 +1,5 @@
 ﻿Public Class MainForm
-    Property discounterHistory As Boolean = 1 ' 0 = discounter form; 1 = discounter2 (form last used)
+
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.ProgramIcon_32x32
@@ -11,9 +11,10 @@
             OpenForm(Discounter2)
         ElseIf (Discounter.Visible = True) Then ' If open already
             OpenForm(Discounter)
-        ElseIf discounterHistory = 0 Then ' open discounter form because it was last open but closed
+        ElseIf Not IsNothing(My.Settings.DiscounterVersion) AndAlso My.Settings.DiscounterVersion = 1 Then
+            Discounter.StartPosition = FormStartPosition.CenterScreen
             OpenForm(Discounter)
-        ElseIf discounterHistory = 1 Then ' open discounter2 form because it was last open but closed
+        ElseIf Not IsNothing(My.Settings.DiscounterVersion) AndAlso My.Settings.DiscounterVersion = 2 Then
             OpenForm(Discounter2)
         Else ' default
             OpenForm(Discounter2)
