@@ -1,208 +1,5 @@
 ﻿Public Class Discounter
 
-    Private Sub Discount1Button1_Click(sender As Object, e As EventArgs) Handles Discount1Button1.Click
-        Dim tmp As String = "", _
-            price As Decimal = 0.0
-        tmp = Discount1TextBox1.Text
-        price = CheckInput(tmp) ' turn string into decimal
-
-        Dim discount As Decimal = 0.0
-        discount = CheckInput(Discount1TextBox2.Text)
-        discount = discount * 0.01
-        If discount <> 1 Then : Discount1Result.Text = CStr(price / (1 - discount)) ' Result
-        Else : Discount1Result.Text = 0 : End If ' division by zero avoidance
-    End Sub
-
-    Private Sub Discount1Button2_Click(sender As Object, e As EventArgs) Handles Discount2Button1.Click
-        Dim tmp As String = "", _
-            price2 As Decimal = 0.0
-        tmp = Discount2TextBox1.Text
-        price2 = CheckInput(tmp) ' turn string into decimal
-
-        Dim discount As Decimal = 0.0
-        discount = CheckInput(Discount2TextBox2.Text)
-        discount = discount * 0.01
-        Discount2Result.Text = CStr(price2 - (discount * price2)) ' Result (Discounted price)
-    End Sub
-
-    Protected Function CheckInput(tmp As String) As Decimal ' Change to decimal and some Input catching here
-        If tmp = "" Then
-            Return 0.0
-        ElseIf tmp = "-" Then
-            Return -0.0
-        Else
-            Return CDec(tmp) ' convert string
-        End If
-    End Function
-
-    Private Sub RadioButton1_MouseClick(sender As Object, e As MouseEventArgs) Handles RadioButton1.MouseClick
-        With Discounter2
-            For Each myForm As Form In My.Application.OpenForms
-                If myForm.Name = Discounter2.Name Then
-                    .Location = Me.Location
-                End If
-            Next
-            .Show()
-            .Location = Me.Location
-            .AutoCalculateCheckBox.Checked = Me.AutoCalculateCheckBox.Checked
-            .AutoSelectCheckBox.Checked = Me.AutoSelectCheckBox.Checked
-            .SuppressErrorsCheckBox.Checked = Me.SuppressErrorsCheckBox.Checked
-        End With
-        My.Settings.DiscounterVersion = 2 ' discounter2 is now active (2 = discounter2 form)
-        Me.Hide()
-    End Sub
-
-    Private Sub BackButton_Click(sender As Object, e As EventArgs) Handles BackButton.Click
-        SaveSettings()
-
-        MainForm.Show()
-        MainForm.WindowState = FormWindowState.Normal ' Unminimize Window
-        Me.Hide()
-    End Sub
-
-    Private Sub ComparePricesButton_Click(sender As Object, e As EventArgs) Handles ComparePricesButton.Click
-        Dim tmp As Decimal = 0.0, tmp2 As Decimal = 0.0
-        tmp = CheckInput(TextBox5.Text) ' first number
-        tmp2 = CheckInput(TextBox6.Text) ' second number
-
-        If (tmp = tmp2) Then
-            PercentLabel1.Text = "Increase From"
-            PercentLabel2.Text = "Decrease From"
-            PercentageResultTextBox1.Text = "0"
-            PercentageResultTextBox2.Text = CStr(tmp)
-            PercentageResultTextBox3.Text = "0"
-            PercentageResultTextBox4.Text = CStr(tmp2)
-        Else
-            If (tmp < tmp2) Then
-                ' no swapping needed
-            ElseIf (tmp > tmp2) Then
-                ' swap tmp with tmp2
-                Dim a As Decimal
-                a = tmp2
-                tmp2 = tmp
-                tmp = a
-            End If
-            If ((tmp < 0 AndAlso tmp2 > 0) OrElse (tmp > 0 AndAlso tmp2 < 0)) Then ' one negative number needs increase/decrease number (not percentage) swapped
-                PercentLabel1.Text = "Increase From"
-                PercentLabel2.Text = "Decrease From"
-                If tmp <> 0 Then : PercentageResultTextBox1.Text = CStr(Math.Abs(((tmp2 - tmp) / (tmp)) * 100)) ' Result
-                Else : PercentageResultTextBox1.Text = "0" : End If ' division by zero avoidance
-                PercentageResultTextBox2.Text = CStr(tmp)
-                If tmp2 <> 0 Then : PercentageResultTextBox3.Text = CStr(Math.Abs(((tmp - tmp2) / (tmp2)) * 100)) ' Result
-                Else : PercentageResultTextBox3.Text = "0" : End If ' division by zero avoidance
-                PercentageResultTextBox4.Text = CStr(tmp2)
-            ElseIf (tmp < 0 AndAlso tmp2 < 0) Then ' both negatives then change labels
-                PercentLabel1.Text = "Decrease From"
-                PercentLabel2.Text = "Increase From"
-                If tmp <> 0 Then : PercentageResultTextBox3.Text = CStr(Math.Abs(((tmp2 - tmp) / (tmp)) * 100)) ' Result
-                Else : PercentageResultTextBox3.Text = "0" : End If ' division by zero avoidance
-                PercentageResultTextBox2.Text = CStr(tmp2)
-                If tmp2 <> 0 Then : PercentageResultTextBox1.Text = CStr(Math.Abs(((tmp - tmp2) / (tmp2)) * 100)) ' Result
-                Else : PercentageResultTextBox1.Text = "0" : End If ' division by zero avoidance
-                PercentageResultTextBox4.Text = CStr(tmp)
-            Else ' Normal without any negative numbers
-                PercentLabel1.Text = "Increase From"
-                PercentLabel2.Text = "Decrease From"
-                If tmp <> 0 Then : PercentageResultTextBox1.Text = CStr(((tmp2 - tmp) / (tmp)) * 100) ' Result
-                Else : PercentageResultTextBox1.Text = "0" : End If ' division by zero avoidance
-                PercentageResultTextBox2.Text = CStr(tmp)
-                If tmp2 <> 0 Then : PercentageResultTextBox3.Text = CStr(Math.Abs(((tmp - tmp2) / (tmp2)) * 100)) ' Result
-                Else : PercentageResultTextBox3.Text = "0" : End If ' division by zero avoidance
-                PercentageResultTextBox4.Text = CStr(tmp2)
-            End If
-        End If
-    End Sub
-
-    Private Sub Discount1TextBox1_Enter(sender As Object, e As EventArgs) Handles Discount1TextBox1.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() Discount1TextBox1.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub Discount1TextBox2_Enter(sender As Object, e As EventArgs) Handles Discount1TextBox2.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() Discount1TextBox2.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub Discount2TextBox1_Enter(sender As Object, e As EventArgs) Handles Discount2TextBox1.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() Discount2TextBox1.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub Discount2TextBox2_Enter(sender As Object, e As EventArgs) Handles Discount2TextBox2.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() Discount2TextBox2.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub TextBox5_Enter(sender As Object, e As EventArgs) Handles TextBox5.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() TextBox5.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub TextBox6_Enter(sender As Object, e As EventArgs) Handles TextBox6.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() TextBox6.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub Discount1Result_Enter(sender As Object, e As EventArgs) Handles Discount1Result.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() Discount1Result.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub Discount2Result_Enter(sender As Object, e As EventArgs) Handles Discount2Result.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() Discount2Result.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub PercentageResultTextBox1_Enter(sender As Object, e As EventArgs) Handles PercentageResultTextBox1.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() PercentageResultTextBox1.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub PercentageResultTextBox2_Enter(sender As Object, e As EventArgs) Handles PercentageResultTextBox2.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() PercentageResultTextBox2.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub PercentageResultTextBox3_Enter(sender As Object, e As EventArgs) Handles PercentageResultTextBox3.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() PercentageResultTextBox3.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub PercentageResultTextBox4_Enter(sender As Object, e As EventArgs) Handles PercentageResultTextBox4.Enter
-        If AutoSelectCheckBox.Checked = True Then : BeginInvoke(DirectCast(Sub() PercentageResultTextBox4.SelectAll(), Action)) : End If
-    End Sub
-
-    Private Sub Discount1TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles Discount1TextBox1.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            Discount1Button1.PerformClick()
-        End If
-    End Sub
-
-    Private Sub Discount1TextBox2_KeyDown(sender As Object, e As KeyEventArgs) Handles Discount1TextBox2.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            Discount1Button1.PerformClick()
-        End If
-    End Sub
-
-    Private Sub Discount2TextBox1_KeyDown(sender As Object, e As KeyEventArgs) Handles Discount2TextBox1.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            Discount2Button1.PerformClick()
-        End If
-    End Sub
-
-    Private Sub Discount2TextBox2_KeyDown(sender As Object, e As KeyEventArgs) Handles Discount2TextBox2.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            Discount2Button1.PerformClick()
-        End If
-    End Sub
-
-    Private Sub TextBox5_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox5.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            ComparePricesButton.PerformClick()
-        End If
-    End Sub
-
-    Private Sub TextBox6_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox6.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.SuppressKeyPress = True
-            ComparePricesButton.PerformClick()
-        End If
-    End Sub
-
     Private Sub Discounter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Icon = My.Resources.ProgramIcon_32x32
 
@@ -221,80 +18,19 @@
         If Not IsNothing(My.Settings.DiscounterSuppressErrors) Then
             SuppressErrorsCheckBox.Checked = My.Settings.DiscounterSuppressErrors
         End If
-    End Sub
-
-    Private Sub Discount1TextBox1_TextChanged(sender As Object, e As EventArgs) Handles Discount1TextBox1.TextChanged
-        If (AutoCalculateCheckBox.Checked = True) Then : Discount1Button1.PerformClick() : End If
-    End Sub
-
-    Private Sub Discount1TextBox2_TextChanged(sender As Object, e As EventArgs) Handles Discount1TextBox2.TextChanged
-        If (AutoCalculateCheckBox.Checked = True) Then : Discount1Button1.PerformClick() : End If
-    End Sub
-
-    Private Sub Discount2TextBox1_TextChanged(sender As Object, e As EventArgs) Handles Discount2TextBox1.TextChanged
-        If (AutoCalculateCheckBox.Checked = True) Then : Discount2Button1.PerformClick() : End If
-    End Sub
-
-    Private Sub Discount2TextBox2_TextChanged(sender As Object, e As EventArgs) Handles Discount2TextBox2.TextChanged
-        If (AutoCalculateCheckBox.Checked = True) Then : Discount2Button1.PerformClick() : End If
-    End Sub
-
-    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
-        If (AutoCalculateCheckBox.Checked = True) Then : ComparePricesButton.PerformClick() : End If
-    End Sub
-
-    Private Sub TextBox6_TextChanged(sender As Object, e As EventArgs) Handles TextBox6.TextChanged
-        If (AutoCalculateCheckBox.Checked = True) Then : ComparePricesButton.PerformClick() : End If
-    End Sub
-
-    Private Sub Discount1TextBox1_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Discount1TextBox1.Validating
-        Static lastGoodInput As String = Discount1TextBox1.Text
-        Validator(sender, e, lastGoodInput)
-    End Sub
-
-    Private Sub Discount1TextBox2_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Discount1TextBox2.Validating
-        Static lastGoodInput As String = Discount1TextBox2.Text
-        Validator(sender, e, lastGoodInput)
-    End Sub
-
-    Private Sub Discount2TextBox1_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Discount2TextBox1.Validating
-        Static lastGoodInput As String = Discount2TextBox1.Text
-        Validator(sender, e, lastGoodInput)
-    End Sub
-
-    Private Sub Discount2TextBox2_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Discount2TextBox2.Validating
-        Static lastGoodInput As String = Discount2TextBox2.Text
-        Validator(sender, e, lastGoodInput)
-    End Sub
-
-    Private Sub TextBox5_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TextBox5.Validating
-        Static lastGoodInput As String = TextBox5.Text
-        Validator(sender, e, lastGoodInput)
-    End Sub
-
-    Private Sub TextBox6_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TextBox6.Validating
-        Static lastGoodInput As String = TextBox6.Text
-        Validator(sender, e, lastGoodInput)
-    End Sub
-
-    Private Sub Validator(ByRef sender As Object, ByRef e As System.ComponentModel.CancelEventArgs, ByRef lastGoodInput As String)
-        If sender.Text = "" Then
-            lastGoodInput = "" ' make usage case for this
-        ElseIf sender.Text = "-" Then
-            lastGoodInput = "-" ' make usage case for this
-        ElseIf Not IsNumeric(sender.Text) Then
-            If SuppressErrorsCheckBox.Checked = False Then
-                MsgBox("Please enter numeric values only.", vbInformation)
-            End If
-            e.Cancel = True
-            sender.Text = lastGoodInput ' set input back to last good input
-        Else
-            If sender.Text.Substring(sender.Text.Length - 1) = "-" OrElse sender.Text.Substring(sender.Text.Length - 1) = "+" Then ' if last char is minus sign
-                sender.Text = sender.Text.Remove(sender.Text.Length - 1) ' prevent "0-" or "22-" inputs from getting through which isNumeric does not catch (appears to be purely cosmetic however)
-                sender.SelectionStart = sender.Text.Length ' set cursor to end
-            End If
-            lastGoodInput = sender.Text ' record good input for replacing of bad input
+        If Not IsNothing(My.Settings.DiscounterRoundingEnabled) Then
+            RoundingCheckBox.Checked = My.Settings.DiscounterRoundingEnabled
         End If
+        If Not IsNothing(My.Settings.DiscounterRoundingValue) Then
+            RoundingNumericUpDown.Value = My.Settings.DiscounterRoundingValue
+        End If
+
+        Discount1TextBox1_lastGoodInput = Discount1TextBox1.Text
+        Discount1TextBox2_lastGoodInput = Discount1TextBox2.Text
+        Discount2TextBox1_lastGoodInput = Discount2TextBox1.Text
+        Discount2TextBox2_lastGoodInput = Discount2TextBox2.Text
+        NumCompare1TextBox_lastGoodInput = NumCompare1TextBox.Text
+        NumCompare2TextBox_lastGoodInput = NumCompare2TextBox.Text
     End Sub
 
     Private Sub Discounter_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -303,14 +39,197 @@
     End Sub
 
     Private Sub Discounter_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Me.SaveSettings()
+        SaveSettings()
     End Sub
 
-    Private Sub SaveSettings()
-        My.Settings.DiscounterVersion = 1
+    Public Sub SaveSettings()
+        If RadioButton1.Checked = True Then
+            My.Settings.DiscounterVersion = 2
+        Else
+            My.Settings.DiscounterVersion = 1
+        End If
 
-        My.Settings.DiscounterAutoCalculate = Me.AutoCalculateCheckBox.Checked
-        My.Settings.DiscounterAutoSelect = Me.AutoSelectCheckBox.Checked
-        My.Settings.DiscounterSuppressErrors = Me.SuppressErrorsCheckBox.Checked
+        My.Settings.DiscounterAutoCalculate = AutoCalculateCheckBox.Checked
+        My.Settings.DiscounterAutoSelect = AutoSelectCheckBox.Checked
+        My.Settings.DiscounterSuppressErrors = SuppressErrorsCheckBox.Checked
+        My.Settings.DiscounterRoundingEnabled = RoundingCheckBox.Checked
+        My.Settings.DiscounterRoundingValue = RoundingNumericUpDown.Value
+    End Sub
+
+    Private Sub Discount1Button1_Click(sender As Object, e As EventArgs) Handles Discount1Button1.Click
+        Dim tmp As String = "",
+            price As Decimal
+        tmp = Discount1TextBox1.Text
+        price = Discounter2.CheckInput(tmp) ' turn string into decimal
+
+        Dim discount As Decimal
+        discount = Discounter2.CheckInput(Discount1TextBox2.Text)
+        discount = discount * 0.01
+        If discount <> 1D Then
+            Discount1Result.Text = CStr(Discounter2.RoundResult(price / (1 - discount), RoundingCheckBox.Checked, RoundingNumericUpDown.Value)) ' Result
+        Else
+            Discount1Result.Text = 0
+        End If ' division by zero avoidance
+    End Sub
+
+    Private Sub Discount1Button2_Click(sender As Object, e As EventArgs) Handles Discount2Button1.Click
+        Dim tmp As String = "",
+            price2 As Decimal
+        tmp = Discount2TextBox1.Text
+        price2 = Discounter2.CheckInput(tmp) ' turn string into decimal
+
+        Dim Discount As Decimal
+        Discount = Discounter2.CheckInput(Discount2TextBox2.Text)
+        Discount = Discount * 0.01
+        Discount2Result.Text = CStr(Discounter2.RoundResult(price2 - (Discount * price2), RoundingCheckBox.Checked, RoundingNumericUpDown.Value)) ' Result (Discounted price)
+    End Sub
+
+    Private Sub RadioButton1_MouseClick(sender As Object, e As MouseEventArgs) Handles RadioButton1.MouseClick
+        With Discounter2
+            For Each myForm As Form In My.Application.OpenForms
+                If myForm.Name = Discounter2.Name Then
+                    .Location = Location
+                End If
+            Next
+            .Show()
+            .Location = Location
+            .AutoCalculateCheckBox.Checked = AutoCalculateCheckBox.Checked
+            .AutoSelectCheckBox.Checked = AutoSelectCheckBox.Checked
+            .SuppressErrorsCheckBox.Checked = SuppressErrorsCheckBox.Checked
+            .RoundingCheckBox.Checked = RoundingCheckBox.Checked
+            .RoundingNumericUpDown.Value = RoundingNumericUpDown.Value
+        End With
+        My.Settings.DiscounterVersion = 2 ' discounter2 is now active (2 = discounter2 form)
+        Me.Hide()
+    End Sub
+
+    Private Sub BackButton_Click(sender As Object, e As EventArgs) Handles BackButton.Click
+        SaveSettings()
+
+        MainForm.Show()
+        MainForm.WindowState = FormWindowState.Normal ' Unminimize Window
+        Me.Hide()
+    End Sub
+
+    Private Sub Discounter1ComparePricesButton_Click(sender As Object, e As EventArgs) Handles ComparePricesButton.Click
+        Discounter2.ComparePricesButtonWork(NumCompare1TextBox, NumCompare2TextBox, PercentLabel1,
+                                       PercentLabel2, PercentageResultTextBox1, PercentageResultTextBox2,
+                                       PercentageResultTextBox3, PercentageResultTextBox4, RoundingCheckBox.Checked, RoundingNumericUpDown.Value)
+    End Sub
+
+    Private Sub SelectAllEvent(sender As Object, e As EventArgs) Handles Discount1TextBox1.Enter, Discount1TextBox2.Enter, Discount2TextBox1.Enter, Discount2TextBox2.Enter,
+             NumCompare1TextBox.Enter, NumCompare2TextBox.Enter, Discount1Result.Enter, Discount2Result.Enter, PercentageResultTextBox1.Enter, PercentageResultTextBox2.Enter,
+             PercentageResultTextBox3.Enter, PercentageResultTextBox4.Enter
+
+        SelectAllText(sender, AutoSelectCheckBox.Checked)
+    End Sub
+
+    Private Sub SelectAllText(TextBoxObj As TextBox, Conditional As Boolean)
+        If Conditional = True Then
+            BeginInvoke(DirectCast(Sub() TextBoxObj.SelectAll(), Action))
+        End If
+    End Sub
+
+    Private Sub Discount1TextBoxes_KeyDown(sender As Object, e As KeyEventArgs) Handles Discount1TextBox1.KeyDown, Discount1TextBox2.KeyDown
+        TextBoxEnterKeyDown(sender, e, Discount1Button1)
+    End Sub
+
+    Private Sub Discount2TextBoxes_KeyDown(sender As Object, e As KeyEventArgs) Handles Discount2TextBox1.KeyDown, Discount2TextBox2.KeyDown
+        TextBoxEnterKeyDown(sender, e, Discount2Button1)
+    End Sub
+
+    Private Sub ComparePricesTextBoxes_KeyDown(sender As Object, e As KeyEventArgs) Handles NumCompare1TextBox.KeyDown, NumCompare2TextBox.KeyDown
+        TextBoxEnterKeyDown(sender, e, ComparePricesButton)
+    End Sub
+
+    Public Sub TextBoxEnterKeyDown(sender As Object, e As KeyEventArgs, ButtonObj As Button)
+        If e.KeyCode = Keys.Enter Then
+            e.SuppressKeyPress = True
+            ButtonObj.PerformClick()
+        End If
+    End Sub
+
+    Private Sub Discount1TextBox_TextChanged(sender As Object, e As EventArgs) Handles Discount1TextBox1.TextChanged, Discount1TextBox2.TextChanged
+        TextChanged_PerformClick(Discount1Button1, AutoCalculateCheckBox.Checked)
+    End Sub
+
+    Private Sub Discount2TextBox_TextChanged(sender As Object, e As EventArgs) Handles Discount2TextBox1.TextChanged, Discount2TextBox2.TextChanged
+        TextChanged_PerformClick(Discount2Button1, AutoCalculateCheckBox.Checked)
+    End Sub
+
+    Private Sub NumCompareTextBox_TextChanged(sender As Object, e As EventArgs) Handles NumCompare1TextBox.TextChanged, NumCompare2TextBox.TextChanged
+        TextChanged_PerformClick(ComparePricesButton, AutoCalculateCheckBox.Checked)
+    End Sub
+
+    Public Sub TextChanged_PerformClick(ByRef ButtonObj As Button, Conditional As Boolean)
+        If (Conditional = True) Then
+            ButtonObj.PerformClick()
+        End If
+    End Sub
+
+    Dim Discount1TextBox1_lastGoodInput As String
+    Private Sub Discount1TextBox1_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Discount1TextBox1.Validating
+        Validator(sender, e, Discount1TextBox1_lastGoodInput)
+        Discount1TextBox1_lastGoodInput = Discount1TextBox1.Text
+    End Sub
+
+    Dim Discount1TextBox2_lastGoodInput As String
+    Private Sub Discount1TextBox2_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Discount1TextBox2.Validating
+        Validator(sender, e, Discount1TextBox2_lastGoodInput)
+        Discount1TextBox2_lastGoodInput = Discount1TextBox2.Text
+    End Sub
+
+    Dim Discount2TextBox1_lastGoodInput As String
+    Private Sub Discount2TextBox1_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Discount2TextBox1.Validating
+        Validator(sender, e, Discount2TextBox1_lastGoodInput)
+        Discount2TextBox1_lastGoodInput = Discount2TextBox1.Text
+    End Sub
+
+    Dim Discount2TextBox2_lastGoodInput As String
+    Private Sub Discount2TextBox2_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Discount2TextBox2.Validating
+        Validator(sender, e, Discount2TextBox2_lastGoodInput)
+        Discount2TextBox2_lastGoodInput = Discount2TextBox2.Text
+    End Sub
+
+    Dim NumCompare1TextBox_lastGoodInput As String
+    Private Sub NumCompare1TextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles NumCompare1TextBox.Validating
+        Validator(sender, e, NumCompare1TextBox_lastGoodInput)
+        NumCompare1TextBox_lastGoodInput = NumCompare1TextBox.Text
+    End Sub
+
+    Dim NumCompare2TextBox_lastGoodInput As String
+    Private Sub NumCompare2TextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles NumCompare2TextBox.Validating
+        Validator(sender, e, NumCompare2TextBox_lastGoodInput)
+        NumCompare2TextBox_lastGoodInput = NumCompare2TextBox.Text
+    End Sub
+
+    Private Sub RoundingCheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles RoundingCheckBox.CheckedChanged
+        Discount1Button1.PerformClick()
+        Discount2Button1.PerformClick()
+        ComparePricesButton.PerformClick()
+    End Sub
+
+    Private Sub RoundingNumericUpDown_ValueChanged(sender As Object, e As EventArgs) Handles RoundingNumericUpDown.ValueChanged
+        Discount1Button1.PerformClick()
+        Discount2Button1.PerformClick()
+        ComparePricesButton.PerformClick()
+    End Sub
+
+    Private Sub Validator(ByRef sender As Object, ByRef e As System.ComponentModel.CancelEventArgs, ByRef lastGoodInput As String)
+        If sender.Text = "" OrElse sender.Text = "-" OrElse sender.Text = "." Then
+            lastGoodInput = sender.Text ' make usage case for this
+        ElseIf Not IsNumeric(sender.Text) Then
+            If SuppressErrorsCheckBox.Checked = False Then
+                MsgBox("Please enter numeric values only.", vbInformation)
+            End If
+            e.Cancel = True
+            sender.Text = lastGoodInput ' set input back to last good input
+        Else
+            If sender.Text.Substring(sender.Text.Length - 1) = "-" Or sender.Text.Substring(sender.Text.Length - 1) = "+" Then ' if last char is minus sign
+                sender.Text = sender.Text.Remove(sender.Text.Length - 1) ' prevent "0-" or "22-" inputs from getting through which isNumeric does not catch (appears to be purely cosmetic however)
+                sender.SelectionStart = sender.Text.Length ' set cursor to end
+            End If
+            lastGoodInput = sender.Text ' record good input for replacing of bad input
+        End If
     End Sub
 End Class

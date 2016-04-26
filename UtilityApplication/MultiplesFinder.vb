@@ -20,7 +20,10 @@
                 TimerBox.Text = Module1.Timer1("stop") ' stop timer
                 MsgBox("Zero, one or blank input entered.", vbInformation)
             Else
-                rawInput = CDec(InputTextBox.Text)
+                If Not Decimal.TryParse(InputTextBox.Text, rawInput) Then
+                    MsgBox("Number is too large.", MsgBoxStyle.Critical, "Error")
+                    Exit Sub
+                End If
                 halfInput = Math.Truncate(rawInput / 2D) ' halve the input because first half is all that's needed
                 ' Truncating odd half numbers instead of rounding up combined with a "-1" in calculations may mean "input - 2" is last tested ... 
                 ' ... number instead of intended "input - 1", however this should not matter at all.
@@ -45,9 +48,7 @@
                     ToggleInputControls() ' toggle control visibility and more
                     progress1 = 0 ' reset variable
                     ProgressBar1.Value = 0 ' reset progress
-                    ProgressGroupBox.Visible = True ' show progress bar
                     text1 = "" ' reset
-                    LongProgressTimer.Enabled = True
                     LongProgressTimer.Start() ' start related timer
 
                     workLoadLng = DetermineThreadWork(CLng(halfInput)) ' determine each threads workload
@@ -59,12 +60,17 @@
                     progress2 = 0 ' reset variable
                     ProgressBar1.Value = 0 ' reset progress
                     text1 = "" 'reset
-                    ProgressGroupBox.Visible = True ' show progress bar
-                    DecimalProgressTimer.Enabled = True
-                    DecimalProgressTimer.Start() ' start related timer
 
                     workLoadDec = DetermineThreadWork(CDec(halfInput))
-                    workLoadDecHalf = Math.Truncate(workLoadDec / 2) ' used in respective progress timer (half because every other is tested)
+                    Try
+                        workLoadDecHalf = Math.Truncate(workLoadDec / 2) ' used in respective progress timer (half because every other is tested)
+                    Catch ex As OverflowException
+                        MsgBox("Number is too large.", MsgBoxStyle.Critical, "Error")
+                        ToggleInputControls()
+                        InputTextBox.Focus()
+                        Exit Sub
+                    End Try
+                    DecimalProgressTimer.Start() ' start related timer
                     StartMultiThreading(CDec(rawInput), CDec(halfInput), workLoadDec) ' start multi-threaded thread work
                     CalculateThreadAlive = True
                 End If
@@ -131,8 +137,10 @@
             startNum = 3 ' odd numeric input
         End If
 
-        For count1 As Integer = startNum To (CInt(input / 2)) Step 2 ' start from 2 (evens) or 3 (odds)
-            If endThread = True Then : Continue For : End If ' end thread flag
+        Dim endNum As Integer = input / 2
+        For count1 As Integer = startNum To endNum Step 2 ' start from 2 (evens) or 3 (odds)
+            If endThread = True Then : Exit For : End If ' end thread flag
+
             If ((input Mod count1) = 0) Then ' DIVIDES EVENLY
                 tally += 1 ' no tallies = no divisible numbers
                 quotient = input / count1 ' get other multiple (besides count1)
@@ -195,7 +203,8 @@
         End If ' do not test input itself (minus 1)
 
         For count As Long = inputStart To (inputEnd) Step 2L ' start from 2 (evens) or 3 (odds)
-            If endThread = True Then : Continue For : End If ' end thread flag
+            If endThread = True Then : Exit For : End If ' end thread flag
+
             If flag1 = True Then : Me.progress1 += 1 : End If ' last thread adds to timer progress
             If ((input Mod count) = 0L) Then ' DIVIDES EVENLY
                 SyncLock accessLock ' only one thread at a time can use evensLng() variable
@@ -239,7 +248,6 @@
                 Next
             End While ' while loop ends when all except last thread finish executation
             LongProgressTimer.Stop()
-            LongProgressTimer.Enabled = False
 
             DisplayResults(evensLng, input, tally, startNum)
             tally = 0 ' reset value
@@ -272,7 +280,8 @@
         End If ' do not test input itself (minus 1)
 
         For count As Decimal = inputStart To (inputEnd) Step 2D ' start from 2 (evens) or 3 (odds)
-            If endThread = True Then : Continue For : End If ' end thread flag
+            If endThread = True Then : Exit For : End If ' end thread flag
+
             If flag1 = True Then : Me.progress1 += 1 : End If ' last thread adds to timer progress
             If ((input Mod count) = 0D) Then ' DIVIDES EVENLY
                 SyncLock accessLock ' only one thread at a time can use evensDec() variable
@@ -315,7 +324,6 @@
                 Next
             End While ' while loop ends when all except last thread finish executation
             LongProgressTimer.Stop()
-            LongProgressTimer.Enabled = False
 
             DisplayResults(evensDec, input, tally, startNum)
             tally = 0 ' reset value
@@ -599,12 +607,10 @@
     Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
         If (Not locked) Then
             If (clearedOnce = True AndAlso Not (RichTextBox1.Text = "")) Then ' After doing else once ever, var will always be true and do this block on clear
-                'System.Diagnostics.Debugger.Break()
                 HiddenRichTextBox.Text = RichTextBox1.Text
                 undoOnce = False ' Allows undo button to do only one undo again
                 RichTextBox1.Clear()
             ElseIf clearedOnce = False Then ' false by default and from start of window form
-                'System.Diagnostics.Debugger.Break()
                 HiddenRichTextBox.Text = RichTextBox1.Text
                 RichTextBox1.Clear()
                 UndoButton.Visible = True ' First and only time undo button becomes visible

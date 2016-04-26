@@ -22,6 +22,7 @@ Partial Class Discounter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Discount1TextBox1 = New System.Windows.Forms.TextBox()
         Me.Discount1TextBox2 = New System.Windows.Forms.TextBox()
         Me.Discount1Button1 = New System.Windows.Forms.Button()
@@ -51,8 +52,8 @@ Partial Class Discounter
         Me.PercentageResultTextBox2 = New System.Windows.Forms.TextBox()
         Me.PercentageResultTextBox1 = New System.Windows.Forms.TextBox()
         Me.PercentageResultTextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.NumCompare1TextBox = New System.Windows.Forms.TextBox()
+        Me.NumCompare2TextBox = New System.Windows.Forms.TextBox()
         Me.PercentLabel2 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.PercentLabel1 = New System.Windows.Forms.Label()
@@ -65,9 +66,13 @@ Partial Class Discounter
         Me.AutoCalculateCheckBox = New System.Windows.Forms.CheckBox()
         Me.AutoSelectCheckBox = New System.Windows.Forms.CheckBox()
         Me.SuppressErrorsCheckBox = New System.Windows.Forms.CheckBox()
+        Me.RoundingNumericUpDown = New System.Windows.Forms.NumericUpDown()
+        Me.RoundingCheckBox = New System.Windows.Forms.CheckBox()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.RoundingNumericUpDown, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Discount1TextBox1
@@ -343,6 +348,7 @@ Partial Class Discounter
         Me.RadioButton1.TabIndex = 16
         Me.RadioButton1.TabStop = True
         Me.RadioButton1.Text = "Single Discounter"
+        Me.ToolTip1.SetToolTip(Me.RadioButton1, "Switch to the combined discounter version")
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'GroupBox3
@@ -351,8 +357,8 @@ Partial Class Discounter
         Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox2)
         Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox1)
         Me.GroupBox3.Controls.Add(Me.PercentageResultTextBox3)
-        Me.GroupBox3.Controls.Add(Me.TextBox5)
-        Me.GroupBox3.Controls.Add(Me.TextBox6)
+        Me.GroupBox3.Controls.Add(Me.NumCompare1TextBox)
+        Me.GroupBox3.Controls.Add(Me.NumCompare2TextBox)
         Me.GroupBox3.Controls.Add(Me.PercentLabel2)
         Me.GroupBox3.Controls.Add(Me.Label17)
         Me.GroupBox3.Controls.Add(Me.PercentLabel1)
@@ -414,25 +420,25 @@ Partial Class Discounter
         Me.PercentageResultTextBox3.TabIndex = 13
         Me.PercentageResultTextBox3.Text = "0"
         '
-        'TextBox5
+        'NumCompare1TextBox
         '
-        Me.TextBox5.Location = New System.Drawing.Point(223, 55)
-        Me.TextBox5.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.TextBox5.MaxLength = 15
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(119, 22)
-        Me.TextBox5.TabIndex = 8
-        Me.TextBox5.Text = "0"
+        Me.NumCompare1TextBox.Location = New System.Drawing.Point(223, 55)
+        Me.NumCompare1TextBox.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.NumCompare1TextBox.MaxLength = 15
+        Me.NumCompare1TextBox.Name = "NumCompare1TextBox"
+        Me.NumCompare1TextBox.Size = New System.Drawing.Size(119, 22)
+        Me.NumCompare1TextBox.TabIndex = 8
+        Me.NumCompare1TextBox.Text = "0"
         '
-        'TextBox6
+        'NumCompare2TextBox
         '
-        Me.TextBox6.Location = New System.Drawing.Point(223, 83)
-        Me.TextBox6.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        Me.TextBox6.MaxLength = 15
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(119, 22)
-        Me.TextBox6.TabIndex = 9
-        Me.TextBox6.Text = "0"
+        Me.NumCompare2TextBox.Location = New System.Drawing.Point(223, 83)
+        Me.NumCompare2TextBox.Margin = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        Me.NumCompare2TextBox.MaxLength = 15
+        Me.NumCompare2TextBox.Name = "NumCompare2TextBox"
+        Me.NumCompare2TextBox.Size = New System.Drawing.Size(119, 22)
+        Me.NumCompare2TextBox.TabIndex = 9
+        Me.NumCompare2TextBox.Text = "0"
         '
         'PercentLabel2
         '
@@ -539,6 +545,7 @@ Partial Class Discounter
         Me.AutoCalculateCheckBox.Size = New System.Drawing.Size(95, 17)
         Me.AutoCalculateCheckBox.TabIndex = 17
         Me.AutoCalculateCheckBox.Text = "Auto Calculate"
+        Me.ToolTip1.SetToolTip(Me.AutoCalculateCheckBox, "Automatically calculate without having to click calculate or press enter")
         Me.AutoCalculateCheckBox.UseVisualStyleBackColor = True
         '
         'AutoSelectCheckBox
@@ -549,6 +556,7 @@ Partial Class Discounter
         Me.AutoSelectCheckBox.Size = New System.Drawing.Size(81, 17)
         Me.AutoSelectCheckBox.TabIndex = 19
         Me.AutoSelectCheckBox.Text = "Auto Select"
+        Me.ToolTip1.SetToolTip(Me.AutoSelectCheckBox, "Automatically select everything in a text box when first selecting it")
         Me.AutoSelectCheckBox.UseVisualStyleBackColor = True
         '
         'SuppressErrorsCheckBox
@@ -559,7 +567,32 @@ Partial Class Discounter
         Me.SuppressErrorsCheckBox.Size = New System.Drawing.Size(100, 17)
         Me.SuppressErrorsCheckBox.TabIndex = 18
         Me.SuppressErrorsCheckBox.Text = "Suppress Errors"
+        Me.ToolTip1.SetToolTip(Me.SuppressErrorsCheckBox, "Suppress any error box messages")
         Me.SuppressErrorsCheckBox.UseVisualStyleBackColor = True
+        '
+        'RoundingNumericUpDown
+        '
+        Me.RoundingNumericUpDown.Location = New System.Drawing.Point(196, 273)
+        Me.RoundingNumericUpDown.Maximum = New Decimal(New Integer() {28, 0, 0, 0})
+        Me.RoundingNumericUpDown.Name = "RoundingNumericUpDown"
+        Me.RoundingNumericUpDown.Size = New System.Drawing.Size(39, 20)
+        Me.RoundingNumericUpDown.TabIndex = 22
+        Me.RoundingNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ToolTip1.SetToolTip(Me.RoundingNumericUpDown, "Number of significant digits to round to")
+        Me.RoundingNumericUpDown.Value = New Decimal(New Integer() {4, 0, 0, 0})
+        '
+        'RoundingCheckBox
+        '
+        Me.RoundingCheckBox.AutoSize = True
+        Me.RoundingCheckBox.Checked = True
+        Me.RoundingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.RoundingCheckBox.Location = New System.Drawing.Point(126, 274)
+        Me.RoundingCheckBox.Name = "RoundingCheckBox"
+        Me.RoundingCheckBox.Size = New System.Drawing.Size(72, 17)
+        Me.RoundingCheckBox.TabIndex = 23
+        Me.RoundingCheckBox.Text = "Rounding"
+        Me.ToolTip1.SetToolTip(Me.RoundingCheckBox, "Enable rounding")
+        Me.RoundingCheckBox.UseVisualStyleBackColor = True
         '
         'Discounter
         '
@@ -567,6 +600,8 @@ Partial Class Discounter
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.BackButton
         Me.ClientSize = New System.Drawing.Size(1235, 300)
+        Me.Controls.Add(Me.RoundingNumericUpDown)
+        Me.Controls.Add(Me.RoundingCheckBox)
         Me.Controls.Add(Me.SuppressErrorsCheckBox)
         Me.Controls.Add(Me.AutoSelectCheckBox)
         Me.Controls.Add(Me.AutoCalculateCheckBox)
@@ -586,6 +621,7 @@ Partial Class Discounter
         Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.RoundingNumericUpDown, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -627,10 +663,13 @@ Partial Class Discounter
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents ComparePricesButton As System.Windows.Forms.Button
     Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents NumCompare1TextBox As System.Windows.Forms.TextBox
+    Friend WithEvents NumCompare2TextBox As System.Windows.Forms.TextBox
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents AutoCalculateCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents AutoSelectCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents SuppressErrorsCheckBox As System.Windows.Forms.CheckBox
+    Friend WithEvents RoundingNumericUpDown As NumericUpDown
+    Friend WithEvents RoundingCheckBox As CheckBox
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
